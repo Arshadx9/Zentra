@@ -12,7 +12,7 @@ export const Usermodel = model ("User" , Username);
 
 const ContentSchema = new Schema ({
     title : String , 
-    Link : String , 
+    link : String , 
     tags : [{type : mongoose.Types.ObjectId , ref:"tag"}],
     userID : [{
         type : mongoose.Types.ObjectId,
