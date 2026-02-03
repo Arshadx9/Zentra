@@ -1,0 +1,34 @@
+import type { ReactElement } from "react";
+
+interface Buttonprops {
+    variant: "primary" | "secondary";
+    size: "sm" | "md" | "lg";
+    text: string;
+    startIcon?: ReactElement;
+    onClick?: () => void;
+}
+ 
+const variantStyles = {
+    "primary": "bg-purple-600 text-white",
+    "secondary": "bg-purple-400 text-white"
+}
+
+const sizeStyles = {
+    "sm": "px-2 py-1 text-sm",
+    "md": "px-4 py-2 text-base",
+    "lg": "px-6 py-3 text-lg"
+}
+
+export const Button = (props: Buttonprops) => {
+    return ( 
+        <div className="">
+              <button 
+            className={`${variantStyles[props.variant]} ${sizeStyles[props.size]} flex gap-3  rounded`}
+            onClick={props.onClick}
+        >
+        {props.text} {props.startIcon}
+        </button>
+        </div>
+      
+    )
+}
