@@ -6,6 +6,7 @@ interface Buttonprops {
     text: string;
     startIcon?: ReactElement;
     onClick?: () => void;
+    loading?: boolean;
 }
  
 const variantStyles = {
@@ -23,7 +24,7 @@ export const Button = (props: Buttonprops) => {
     return ( 
         <div className="">
               <button 
-            className={`${variantStyles[props.variant]} ${sizeStyles[props.size]} flex gap-3  rounded`}
+            className={`${variantStyles[props.variant]} ${sizeStyles[props.size]} ${props.loading ? "opacity-45" :""}  disabled=${props.loading} flex gap-3  rounded`}
             onClick={props.onClick}
         >
         {props.text} {props.startIcon}
