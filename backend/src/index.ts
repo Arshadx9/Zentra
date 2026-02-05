@@ -3,10 +3,14 @@ import mongoose from "mongoose"
 import jwt from "jsonwebtoken"
 import { Contentmodel, Usermodel } from "./db.js"
 import { usemiddleware } from "./middleware.js"
+import cors from "cors";
+
+
 
 const app = express()
 
 app.use(express.json())
+app.use(cors());
 
 const JWT_SECRET = "!23123";
 
