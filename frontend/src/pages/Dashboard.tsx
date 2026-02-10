@@ -4,11 +4,12 @@ import { Card } from '../components/card'
 import { Createpop } from '../components/contentpop'
 import { Plusicon } from '../icons/plusicon'
 import { Shareicon } from '../icons/shareicon'
+import { useContent } from '../hooks/useContent'
 
 export const Dashboard = () => {
 
   const [modalOpen , setModalOpen] = useState(false)
-
+const contents = useContent()
   return (
     <div className=" ">
       <Createpop open={modalOpen} onClose={()=>{

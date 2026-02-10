@@ -1,6 +1,10 @@
 import { Crossicon } from "../icons/crossicon";
 import { Button } from "./button";
 import { Input } from "./input";
+import { useRef } from "react";
+import { BACKEND_URL } from "../config";
+import axios from "axios"; 
+
 interface createpopprops {
     open? : boolean;
     onClose? : () => void;
@@ -8,6 +12,29 @@ interface createpopprops {
 }
 
 export function Createpop({ open, onClose }: createpopprops) {
+
+    const titleref = useRef<HTMLInputElement>()
+    const linkref = useRef<HTMLInputElement>()
+
+  async function addContent (){
+const title = titleref.current?.value;
+const link = linkref.current?.value;
+
+await axios.post(`${BACKEND_URL}/api/v1/content`, {
+title,
+link,
+
+} ,{
+    headers:{
+         "authorisation" : localStorage.getItem("token")
+    }
+       
+    
+})
+
+
+   }
+   
     if (!open) return null;  
     
     return (
@@ -21,10 +48,10 @@ export function Createpop({ open, onClose }: createpopprops) {
                 </div>
    
                <div className="gap-4 flex flex-col mt-3 ">
-               <Input placeholder={"Title"} />
-               <Input placeholder={"Link"} />
+               <Input ref={titleref} placeholder={"Title"} />
+               <Input ref={linkref} placeholder={"Link"} />
                </div>
-    <Button variant="primary" size="sm" text="Submit" onClick={()=>{}} />
+    <Button variant="primary" size="sm" text="Submit" onClick={addContent} />
 
 
             </div>
