@@ -37,11 +37,26 @@ const contents = useContent()
 
       </div>
       <div className='flex'>
-        {
-          contents.map(({title, link})=>
-         <Card link={link} title={title} />
-         )
-        }
+        {contents.map(({ title, link }: any, index: number) => {
+          let type: "youtube" | "twitter" | undefined = undefined;
+          
+          if (typeof link === "string") {
+            if (link.includes("youtu.be") || link.includes("youtube.com")) {
+              type = "youtube";
+            } else if (link.includes("x.com") || link.includes("twitter.com")) {
+              type = "twitter";
+            }
+          }
+
+          return (
+            <Card
+              key={index}
+              link={link}
+              title={title}
+              type={type}
+            />
+          );
+        })}
       </div>
      
 

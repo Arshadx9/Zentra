@@ -13,26 +13,36 @@ interface createpopprops {
 
 export function Createpop({ open, onClose }: createpopprops) {
 
-    const titleref = useRef<HTMLInputElement>()
-    const linkref = useRef<HTMLInputElement>()
+    const titleref = useRef<HTMLInputElement | null>(null);
+    const linkref = useRef<HTMLInputElement | null>(null);
 
-  async function addContent (){
-    const title = titleref.current?.value;
-    const link = linkref.current?.value;
+    async function addContent() {
+        const title = titleref.current?.value;
+        const link = linkref.current?.value;
 
-    // 👇 ADDED LINE (only addition)
-    const token = localStorage.getItem("token");
-    console.log("TOKEN SENT:", token);
+        const token = localStorage.getItem("token");
 
-    await axios.post(`${BACKEND_URL}/api/v1/content`, {
-      title,
-      link,
-    } ,{
-        headers:{
-             "authorization" : token
+        if (!title || !link || !token) {
+            console.warn("Missing title, link, or token");
+            return;
         }
-    })
-   }
+
+        await axios.post(`${BACKEND_URL}/api/v1/content`, {
+            title,
+            link,
+        }, {
+            headers: {
+                authorization: token
+            }
+        });
+
+        // clear inputs
+        if (titleref.current) titleref.current.value = "";
+        if (linkref.current) linkref.current.value = "";
+
+        // close the modal after successful submit
+        if (onClose) onClose();
+    }
    
     if (!open) return null;  
     
@@ -50,10 +60,12 @@ export function Createpop({ open, onClose }: createpopprops) {
                <Input ref={titleref} placeholder={"Title"} />
                <Input ref={linkref} placeholder={"Link"} />
                </div>
-               <Button variant="primary" size="sm" text="Submit" onClick={()=>{
-                 console.log("BUTTON CLICKED");
-                   addContent();
-               }} />
+               <Button
+                    variant="primary"
+                    size="sm"
+                    text="Submit"
+                    onClick={addContent}
+               />
             </div>
         </div>
     );

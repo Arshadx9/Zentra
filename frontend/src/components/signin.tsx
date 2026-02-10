@@ -26,7 +26,7 @@ const response = await axios.post(`${BACKEND_URL}/api/v1/signin` , {
 })
 
   console.log(response.data)
-  const jwt = response.data.token 
+  const jwt = response.data["your token"];
 
 localStorage.setItem("token",jwt)
 
