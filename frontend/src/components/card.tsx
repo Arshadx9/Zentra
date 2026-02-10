@@ -3,7 +3,7 @@ import { Plusicon } from "../icons/plusicon";
 interface Cardprops {
   title: string;
   link: string;
-  type: "twitter" | "youtube";
+  type?: "twitter" | "youtube";
 }
 
 const getYoutubeEmbedUrl = (url: string) => {

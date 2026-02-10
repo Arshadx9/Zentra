@@ -17,22 +17,21 @@ export function Createpop({ open, onClose }: createpopprops) {
     const linkref = useRef<HTMLInputElement>()
 
   async function addContent (){
-const title = titleref.current?.value;
-const link = linkref.current?.value;
+    const title = titleref.current?.value;
+    const link = linkref.current?.value;
 
-await axios.post(`${BACKEND_URL}/api/v1/content`, {
-title,
-link,
+    // 👇 ADDED LINE (only addition)
+    const token = localStorage.getItem("token");
+    console.log("TOKEN SENT:", token);
 
-} ,{
-    headers:{
-         "authorisation" : localStorage.getItem("token")
-    }
-       
-    
-})
-
-
+    await axios.post(`${BACKEND_URL}/api/v1/content`, {
+      title,
+      link,
+    } ,{
+        headers:{
+             "authorization" : token
+        }
+    })
    }
    
     if (!open) return null;  
@@ -51,11 +50,11 @@ link,
                <Input ref={titleref} placeholder={"Title"} />
                <Input ref={linkref} placeholder={"Link"} />
                </div>
-    <Button variant="primary" size="sm" text="Submit" onClick={addContent} />
-
-
+               <Button variant="primary" size="sm" text="Submit" onClick={()=>{
+                 console.log("BUTTON CLICKED");
+                   addContent();
+               }} />
             </div>
         </div>
     );
 }
-

@@ -1,5 +1,6 @@
 import { useEffect , useState} from "react"
 import axios from "axios"
+import { BACKEND_URL } from "../config"
 
 export function useContent (){
     const [contents , setContents] = useState([])
@@ -7,7 +8,8 @@ export function useContent (){
 useEffect(()=>{
   axios.get(`${BACKEND_URL}/api/v1/content`, {
     headers : {
-         "authorisation" : localStorage.getItem("token")
+         "authorization" : localStorage.getItem("token")
+         
     }
   })
   .then((response)=>{

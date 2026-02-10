@@ -37,8 +37,11 @@ const contents = useContent()
 
       </div>
       <div className='flex'>
-         <Card type="twitter" link="https://x.com/VeryAI/status/2018416157796049387" title="first post" /> 
-      <Card type="youtube" link="https://youtu.be/XZLYkw_eWlc?si=yq2Xbf8x8nHnJSwV" title="second post" /> 
+        {
+          contents.map(({title, link})=>
+         <Card link={link} title={title} />
+         )
+        }
       </div>
      
 

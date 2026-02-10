@@ -25,11 +25,13 @@ const response = await axios.post(`${BACKEND_URL}/api/v1/signin` , {
     password
 })
 
-navigate('/dashboard')
   console.log(response.data)
   const jwt = response.data.token 
 
 localStorage.setItem("token",jwt)
+
+
+navigate('/dashboard')
 
 }
     catch(error){
