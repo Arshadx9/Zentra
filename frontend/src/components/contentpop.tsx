@@ -36,11 +36,9 @@ export function Createpop({ open, onClose }: createpopprops) {
             }
         });
 
-        // clear inputs
         if (titleref.current) titleref.current.value = "";
         if (linkref.current) linkref.current.value = "";
 
-        // close the modal after successful submit
         if (onClose) onClose();
     }
    
