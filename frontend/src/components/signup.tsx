@@ -30,9 +30,9 @@ navigate('/signin')
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center gap-4">
-      <Input ref={usernameRef} placeholder="username" />
-      <Input ref={passwordRef} placeholder="password" />
+    <div className="h-screen w-screen flex flex-col justify-center items-center gap-4 bg-black">
+      <Input ref={usernameRef} placeholder="username"  className="border text-white p-2 font-mono  "/>
+      <Input ref={passwordRef} placeholder="password "  className="border text-white p-2 font-mono " />
       <Button onClick={signup} variant="primary" size="md" text="sign-up" loading={false} />
     </div>
   );

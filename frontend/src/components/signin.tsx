@@ -43,8 +43,8 @@ navigate('/dashboard')
 
     return(
         <div className="h-screen w-screen flex flex-col justify-center items-center gap-4 ">
-<Input ref={usernameRef} placeholder="username"/>
-<Input ref={passwordRef}   placeholder="password"/>
+<Input ref={usernameRef} placeholder="username" className="border text-white p-2 font-mono" />
+<Input ref={passwordRef}   placeholder="password" className="border text-white p-2 font-mono" />
 
 <Button onClick={signin} variant="primary" size="md" text="sign-in" loading={false} />
 
