@@ -1,10 +1,8 @@
-import type { ReactElement } from "react";
 
 interface Buttonprops {
     variant: "primary" | "secondary";
     size: "sm" | "md" | "lg";
     text: string;
-    startIcon?: ReactElement;
     onClick?: () => void;
     loading?: boolean;
 }
@@ -27,7 +25,7 @@ export const Button = (props: Buttonprops) => {
             className={`${variantStyles[props.variant]} ${sizeStyles[props.size]} ${props.loading ? "opacity-45" :""}  disabled=${props.loading} flex gap-3  rounded`}
             onClick={props.onClick}
         >
-        {props.text} {props.startIcon}
+        {props.text} 
         </button>
         </div>
       
