@@ -22,7 +22,7 @@ export const Button = (props: Buttonprops) => {
     return ( 
         <div className="">
               <button 
-            className={`${variantStyles[props.variant]} ${sizeStyles[props.size]} ${props.loading ? "opacity-45" :""}  disabled=${props.loading} flex gap-3  rounded`}
+            className={`${variantStyles[props.variant]} ${sizeStyles[props.size]} ${props.loading ? "opacity-45" :""}  disabled=${props.loading} flex gap-3  rounded-lg`}
             onClick={props.onClick}
         >
         {props.text} 
