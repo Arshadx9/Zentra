@@ -20,7 +20,6 @@ export function Signup() {
         password
       });
       console.log(response.data);
-      alert("Signup successful!");
 navigate('/signin')
 
     } catch (error) {
