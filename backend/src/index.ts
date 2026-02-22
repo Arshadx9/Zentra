@@ -54,7 +54,7 @@ res.json({
 
 app.post("/api/v1/content", usemiddleware , async (req ,res , next)=>{
 const title = req.body.title 
-const link = req.body.link   // fix: use lowercase key sent from frontend
+const link = req.body.link   
 
  await  Contentmodel.create({
     link, 
