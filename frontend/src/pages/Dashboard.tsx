@@ -3,6 +3,7 @@ import { Button } from '../components/button'
 import { Card } from '../components/card'
 import { Createpop } from '../components/contentpop'
 import { useContent } from '../hooks/useContent'
+import { Fileupload } from '../components/fileupload'
 
 export const Dashboard = () => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -15,7 +16,7 @@ export const Dashboard = () => {
       <div className="flex gap-4 p-4">
         <input type="file" className='bg-white'  />
         <Button variant="primary" size="md" text="Add Content" onClick={() => setModalOpen(true)} />
-        <Button variant="secondary" size="md" text="Secondary Button" />
+      <Fileupload/>
 
       </div>
 
