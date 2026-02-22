@@ -21,7 +21,7 @@ const filehandlechange = () =>{
 return(
     <div>
         <input type="file" accept=".pdf" ref={fileinputref} onChange={filehandlechange} className="hidden" />
-        <Button variant="primary" size="md" text="sign-in" onClick={handleclick} ></Button>
+        <Button variant="primary" size="md" text="Upload pdf" onClick={handleclick} ></Button>
     </div>
 )
 
