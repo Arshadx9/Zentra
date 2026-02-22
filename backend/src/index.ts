@@ -1,5 +1,4 @@
 import express from "express"
-import mongoose from "mongoose"
 import jwt from "jsonwebtoken"
 import { Contentmodel, Usermodel } from "./db.js"
 import { usemiddleware } from "./middleware.js"
