@@ -1,5 +1,6 @@
 import { useRef } from "react"
 import { Button } from "./button"
+import axios from "axios"
 
 export const Fileupload = () =>{
     const fileinputref = useRef<HTMLInputElement>(null)
@@ -12,10 +13,17 @@ export const Fileupload = () =>{
 const filehandlechange = () =>{
     const files = Array.from(fileinputref.current?.files??[])
 
-    files.forEach(file => {
-        console.log(file.name)
-       
+    files.forEach( async (file)=>{
+
+        const formData = new FormData()
+        formData.append("pdf" , file)
+
+  const response = await axios.post("/upload" , formData)
+
+  console.log(response.data)
+
     })
+
 }
 
 return(
