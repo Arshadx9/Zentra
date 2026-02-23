@@ -3,15 +3,17 @@ import jwt from "jsonwebtoken"
 import { Contentmodel, Usermodel } from "./db.js"
 import { usemiddleware } from "./middleware.js"
 import cors from "cors";
-
-
+import multer from "multer";
 
 const app = express()
+
 
 app.use(express.json())
 app.use(cors());
 
 const JWT_SECRET = "!23123";
+
+
 
 app.post("/api/v1/signup" , async (req , res) =>{
 const username = req.body.username;
@@ -86,12 +88,27 @@ app.delete("/api/v1/content" , (req , res)=>{
 
 })
 
-app.post("/api/v1/brain/share" , (req , res )=>{
+const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+    if (file.mimetype === "application/pdf") {
+        cb(null, true)
+    } else {
+        cb(new Error("only PDFs allowed"))
+    }
+}
 
-} )
-
-app.get("/api/v1/brain/:sharelink" , (req, res) =>{
-    
+const upload = multer({
+    fileFilter: fileFilter,
+    limits: { fileSize: 10 * 1024 * 1024 }
 })
+
+
+app.post("/upload" , upload.single("pdf") , (req , res)=>{
+    console.log(req.file)
+    res.json({
+        message: "file received"
+    })
+})
+
+
 
 app.listen(3001)
