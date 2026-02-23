@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 export function Signin (){
 
 
-const usernameRef = useRef<HTMLInputElement>()
-const passwordRef = useRef<HTMLInputElement>()
+const usernameRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
 
 
