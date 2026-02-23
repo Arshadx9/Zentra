@@ -14,7 +14,6 @@ export const Dashboard = () => {
       <Createpop open={modalOpen} onClose={() => setModalOpen(false)} />
 
       <div className="flex gap-4 p-4">
-        <input type="file" className='bg-white'  />
         <Button variant="primary" size="md" text="Add Content" onClick={() => setModalOpen(true)} />
       <Fileupload/>
 
