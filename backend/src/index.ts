@@ -6,7 +6,7 @@ import cors from "cors";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
-import { processPdf } from "./processPdf.js"
+import { processPdf } from "./processpdf.js"
 
 const app = express()
 
