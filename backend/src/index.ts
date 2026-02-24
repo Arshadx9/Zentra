@@ -6,6 +6,7 @@ import cors from "cors";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { processPdf } from "./processPdf.js"
 
 const app = express()
 
@@ -77,8 +78,7 @@ app.get("/api/v1/content", usemiddleware, async (req, res) => {
     })
 })
 
-app.delete("/api/v1/content", (req, res) => {
-})
+
 
 const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
     if (file.mimetype === "application/pdf") {
@@ -108,14 +108,24 @@ const upload = multer({
     limits: { fileSize: 10 * 1024 * 1024 }
 })
 
-app.post("/upload", upload.single("pdf"), (req, res) => {
+
+
+
+
+
+app.post("/upload", upload.single("pdf"), async (req, res) => {
     if (!req.file) {
         res.status(400).json({ message: "no file received" })
         return
     }
+
+    const filepath = `uploads/${req.file.filename}`
+    const chunks = await processPdf(filepath)
+
     res.json({
         success: true,
-        filename: req.file.filename
+        filename: req.file.filename,
+        totalChunks: chunks.length
     })
 })
 
