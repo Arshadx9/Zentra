@@ -1,6 +1,6 @@
 import express from "express"
 import jwt from "jsonwebtoken"
-import { Contentmodel, Usermodel } from "./db.js"
+import { Contentmodel, Uploadmodel, Usermodel } from "./db.js"
 import { usemiddleware } from "./middleware.js"
 import cors from "cors";
 import multer from "multer";
@@ -116,7 +116,7 @@ const upload = multer({
 
 
 
-app.post("/upload", upload.single("pdf"), async (req, res) => {
+app.post("/upload",usemiddleware, upload.single("pdf"), async (req, res) => {
     if (!req.file) {
         res.status(400).json({ message: "no file received" })
         return
@@ -125,6 +125,16 @@ app.post("/upload", upload.single("pdf"), async (req, res) => {
     const filepath = `uploads/${req.file.filename}`
     const chunks = await processPdf(filepath)
      await embedandstore(chunks)
+
+await Uploadmodel.create({
+
+filename : req.file.filename,
+Originalname : req.file.originalname,
+//@ts-ignore
+        userId: req.userId
+
+
+})
 
     res.json({
         success: true,
