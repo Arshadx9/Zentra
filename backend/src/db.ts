@@ -36,3 +36,16 @@ const LinkSchema = new Schema ({
 })
 
 export const Linkmodel = model("links" , LinkSchema)
+
+const UploadSchema = new Schema ({
+filename : String,
+Originalname : String , 
+userId : mongoose.Schema.Types.ObjectId,
+uploadedAt : {
+    type :Date , 
+    default : Date.now 
+}
+
+})
+
+export const Uploadmodel = model("Upload" , UploadSchema)
