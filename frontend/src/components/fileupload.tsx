@@ -4,6 +4,8 @@ import axios from "axios"
 import { BACKEND_URL } from "../config"
 
 export const Fileupload = () =>{
+ const token = localStorage.getItem("token");
+
     const fileinputref = useRef<HTMLInputElement>(null)
 
     const handleclick = () => {
@@ -19,7 +21,11 @@ const filehandlechange = () =>{
         const formData = new FormData()
         formData.append("pdf" , file)
 
-  const response = await axios.post(`${BACKEND_URL}/upload` , formData)
+  const response = await axios.post(`${BACKEND_URL}/upload` , formData ,{
+    headers:{
+        authorization : token
+    }
+  })
 
   console.log(response.data)
 
