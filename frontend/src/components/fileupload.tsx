@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { Button } from "./button"
 import axios from "axios"
+import { BACKEND_URL } from "../config"
 
 export const Fileupload = () =>{
     const fileinputref = useRef<HTMLInputElement>(null)
@@ -18,7 +19,7 @@ const filehandlechange = () =>{
         const formData = new FormData()
         formData.append("pdf" , file)
 
-  const response = await axios.post("/upload" , formData)
+  const response = await axios.post(`${BACKEND_URL}/upload` , formData)
 
   console.log(response.data)
 
