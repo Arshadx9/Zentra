@@ -7,6 +7,9 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { processPdf } from "./processpdf.js"
+import dotenv from "dotenv"
+dotenv.config()
+import { embedandstore } from "./embed&store.js";
 
 const app = express()
 
@@ -121,6 +124,7 @@ app.post("/upload", upload.single("pdf"), async (req, res) => {
 
     const filepath = `uploads/${req.file.filename}`
     const chunks = await processPdf(filepath)
+     await embedandstore(chunks)
 
     res.json({
         success: true,
