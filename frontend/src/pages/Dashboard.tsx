@@ -7,12 +7,25 @@ import { Fileupload } from '../components/fileupload'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+interface upload {
+    _id: string
+    Originalname: string
+    filename: string
+}
+
+
 
 export const Dashboard = () => {
 
-  const [upload , setUpload] = useState()
+  
+
+  const [upload , setUpload] = useState <upload[]> ([])
   const token = localStorage.getItem("token")
-  const navigate = useNavigate
+  const navigate = useNavigate()
+
+
+
+
 
   useEffect( () => {
 axios.get("http://localhost:3001/uploads" , {
@@ -48,14 +61,14 @@ headers: {
         ))}
       </div>
 
-{upload.map( (upload)=>{
-<div key={upload._id}>
+{upload.map( (item)=>(
+<div key={item._id}>
 
-  <p>{upload.Originalname} </p>
-  <button onClick={() => navigate(`/chat/${upload._id}`)} >Ask question </button>
+  <p>{item.Originalname} </p>
+  <button onClick={() => navigate(`/chat/${item._id}`)} >Ask question </button>
 
 </div>
-}
+)
 )}
 
     </div>
