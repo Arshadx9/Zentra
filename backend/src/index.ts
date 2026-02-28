@@ -10,6 +10,8 @@ import { processPdf } from "./processpdf.js"
 import dotenv from "dotenv"
 dotenv.config()
 import { embedandstore } from "./embed&store.js";
+import { queryPdf } from "./query.js"
+
 
 const app = express()
 
@@ -141,6 +143,30 @@ Originalname : req.file.originalname,
         filename: req.file.filename,
         totalChunks: chunks.length
     })
+
+
+app.post("/ask", usemiddleware, async (req, res) => {
+    const question = req.body.question
+
+    if (!question) {
+        res.status(400).json({ message: "no question provided" })
+        return
+    }
+
+    const answer = await queryPdf(question)
+
+    res.json({
+        answer
+    })
+})
+
+
+
+
+
+
+
+
 })
 
 app.listen(3001)
