@@ -46,6 +46,8 @@ headers: {
   const [modalOpen, setModalOpen] = useState(false)
   const contents = useContent()
 
+  console.log("upload state:", upload)
+
   return (
     <div className='bg-black min-h-screen' >
       <Createpop open={modalOpen} onClose={() => setModalOpen(false)} />
@@ -62,15 +64,12 @@ headers: {
         ))}
       </div>
 
-{upload.map( (item)=>(
-<div key={item._id}>
-
-  <p>{item.Originalname} </p>
-  <button onClick={() => navigate(`/chat/${item._id}`)} >Ask question </button>
-
-</div>
-)
-)}
+{upload.map((item) => (
+    <div key={item._id} style={{ background: "white", margin: "10px", padding: "10px" }}>
+        <p style={{ color: "black" }}>{item.Originalname}</p>
+        <button onClick={() => navigate(`/chat/${item._id}`)}>Ask question</button>
+    </div>
+))}
 
     </div>
   )
