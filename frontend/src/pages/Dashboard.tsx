@@ -7,7 +7,7 @@ import { Fileupload } from '../components/fileupload'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-interface upload {
+interface Upload {
     _id: string
     Originalname: string
     filename: string
@@ -19,7 +19,7 @@ export const Dashboard = () => {
 
   
 
-  const [upload , setUpload] = useState <upload[]> ([])
+  const [upload , setUpload] = useState <Upload[]> ([])
   const token = localStorage.getItem("token")
   const navigate = useNavigate()
 
@@ -36,6 +36,7 @@ headers: {
 
 })
 .then((response)=>{
+  console.log(response.data)
   setUpload(response.data.uploads)
 })
 
