@@ -28,6 +28,8 @@ const filehandlechange = () =>{
   })
 
   console.log(response.data)
+  window.location.reload()
+
 
     })
 
