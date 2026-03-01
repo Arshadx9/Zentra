@@ -27,9 +27,9 @@ const[answer , setanswer] = useState("")
 
 
 return(
-    <div className="bg-black">
-    <Input ref={inputRef} placeholder="username" className="border p-2 font-mono  text-white" />
-          <Button onClick={sendques} variant="primary" size="md" text="sign-up" loading={false} />
+    <div className="bg-black ">
+    <Input ref={inputRef} placeholder="ask question" className="border p-2 font-mono  text-white" />
+          <Button onClick={sendques} variant="primary" size="md" text="send question" loading={false} />
     {answer && <p className="text-white">{answer}</p>}
     </div>
 )

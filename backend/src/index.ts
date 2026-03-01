@@ -11,8 +11,6 @@ import dotenv from "dotenv"
 dotenv.config()
 import { embedandstore } from "./embed&store.js";
 import { queryPdf } from "./query.js"
-
-
 const app = express()
 
 app.use(express.json())
@@ -83,8 +81,6 @@ app.get("/api/v1/content", usemiddleware, async (req, res) => {
     })
 })
 
-
-
 const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
     if (file.mimetype === "application/pdf") {
         cb(null, true)
@@ -113,12 +109,7 @@ const upload = multer({
     limits: { fileSize: 10 * 1024 * 1024 }
 })
 
-
-
-
-
-
-app.post("/upload",usemiddleware, upload.single("pdf"), async (req, res) => {
+app.post("/upload", usemiddleware, upload.single("pdf"), async (req, res) => {
     if (!req.file) {
         res.status(400).json({ message: "no file received" })
         return
@@ -126,24 +117,28 @@ app.post("/upload",usemiddleware, upload.single("pdf"), async (req, res) => {
 
     const filepath = `uploads/${req.file.filename}`
     const chunks = await processPdf(filepath)
-     await embedandstore(chunks)
+    await embedandstore(chunks)
 
-await Uploadmodel.create({
-
-filename : req.file.filename,
-Originalname : req.file.originalname,
-//@ts-ignore
+    await Uploadmodel.create({
+        filename: req.file.filename,
+        Originalname: req.file.originalname,
+        //@ts-ignore
         userId: req.userId
-
-
-})
+    })
 
     res.json({
         success: true,
         filename: req.file.filename,
         totalChunks: chunks.length
     })
+})
 
+app.get("/uploads", usemiddleware, async (req, res) => {
+    //@ts-ignore
+    const userId = req.userId
+    const uploads = await Uploadmodel.find({ userId })
+    res.json({ uploads })
+})
 
 app.post("/ask", usemiddleware, async (req, res) => {
     const question = req.body.question
@@ -155,18 +150,7 @@ app.post("/ask", usemiddleware, async (req, res) => {
 
     const answer = await queryPdf(question)
 
-    res.json({
-        answer
-    })
-})
-
-
-
-
-
-
-
-
+    res.json({ answer })
 })
 
 app.listen(3001)
