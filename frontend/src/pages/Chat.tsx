@@ -14,7 +14,7 @@ const[answer , setanswer] = useState("")
 
      const question = inputRef.current?.value;
 
-     const response = await axios.post("http://localhost:3001/ask" , { question:question}
+    const response = await axios.post("https://zentra-4tw8.onrender.com/ask" , { question:question}
        
         ,  {
         headers :{

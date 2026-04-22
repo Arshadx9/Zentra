@@ -28,7 +28,7 @@ export const Dashboard = () => {
 
 
   useEffect( () => {
-axios.get("http://localhost:3001/uploads" , {
+axios.get("https://zentra-4tw8.onrender.com/uploads" , {
 
 headers: {
   authorization:token
