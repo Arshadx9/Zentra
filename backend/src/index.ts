@@ -116,21 +116,33 @@ app.post("/upload", usemiddleware, upload.single("pdf"), async (req, res) => {
     }
 
     const filepath = `uploads/${req.file.filename}`
-    const chunks = await processPdf(filepath)
-    await embedandstore(chunks)
 
-    await Uploadmodel.create({
-        filename: req.file.filename,
-        Originalname: req.file.originalname,
-        //@ts-ignore
-        userId: req.userId
-    })
+    try {
+        const chunks = await processPdf(filepath)
+        await embedandstore(chunks)
 
-    res.json({
-        success: true,
-        filename: req.file.filename,
-        totalChunks: chunks.length
-    })
+        // Delete the file after processing — no longer needed
+        fs.unlinkSync(filepath)
+
+        await Uploadmodel.create({
+            filename: req.file.filename,
+            Originalname: req.file.originalname,
+            //@ts-ignore
+            userId: req.userId
+        })
+
+        res.json({
+            success: true,
+            filename: req.file.filename,
+            totalChunks: chunks.length
+        })
+    } catch (err) {
+        // Delete the file even if processing fails
+        if (fs.existsSync(filepath)) {
+            fs.unlinkSync(filepath)
+        }
+        throw err
+    }
 })
 
 app.get("/uploads", usemiddleware, async (req, res) => {
