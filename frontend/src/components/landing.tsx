@@ -6,7 +6,7 @@ export function Landing(){
     return(
         
         <div className="bg-black  h-screen text-white flex flex-col justify-center items-center gap-4 ">
-<h1 className="font-semibold text-7xl tracking-tighter font-sans " >Welcome to "talk2it"</h1>
+<h1 className="font-semibold text-7xl tracking-tighter font-sans " >Welcome to <span className="text-emerald-200 font-mono " >Zentra</span></h1>
 <p className="font-light mb-6 ">one place to store and chat with your content</p>
 
 <div className="flex gap-3.5">
