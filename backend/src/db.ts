@@ -1,6 +1,8 @@
 import mongoose , { model , Schema } from "mongoose";
+import dotenv from "dotenv"
+dotenv.config()
 
-mongoose.connect("mongodb+srv://houseofgray111_db_user:houseofgray@zentra.ke4u2m7.mongodb.net/")
+mongoose.connect(process.env.MONGODB_URI!)
 
 const Username = new Schema ({
 username :{ type :String , unique:true },
