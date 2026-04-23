@@ -1,6 +1,6 @@
-# RAG-Doc
+# Zentra
 
-RAG-Doc is a full-stack application for document retrieval, embedding, and querying using a modern web interface.
+Zentra is a full-stack application for document retrieval, embedding, and querying using a modern web interface.
 
 ## Features
 - Upload and process PDF documents
